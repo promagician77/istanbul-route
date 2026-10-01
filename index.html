@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex, nofollow">
+<title>Istanbul bus map – route breakdown</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%23D4A843'/><text x='32' y='45' text-anchor='middle' font-size='36'>🚌</text></svg>" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0E1117;--surface:#161B22;--border:#30363D;--ink:#E6EDF3;--sub:#8B949E;--gold:#D4A843;--blue:#58A6FF;--green:#3FB950;--red:#F85149;--orange:#D29922;
+  box-sizing:border-box;color-scheme:dark;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.top{border-bottom:1px solid var(--border);padding:20px 0 16px}
+.top h1{margin:0;font-size:20px;font-weight:700;color:var(--gold)}
+.top p{margin:4px 0 0;color:var(--sub);font-size:14px}
+h2{font-size:18px;font-weight:700;margin:40px 0 12px;color:var(--ink)}
+h3{font-size:15px;font-weight:600;margin:24px 0 8px}
+p{margin:0 0 14px}
+.note{font-size:14px;color:var(--sub)}
+
+/* Route diagram */
+.route{display:flex;flex-direction:column;gap:0;margin:24px 0 12px;position:relative;padding-left:32px}
+.route::before{content:'';position:absolute;left:11px;top:16px;bottom:16px;width:3px;background:linear-gradient(var(--gold) 0%,var(--gold) 55%,var(--green) 55%,var(--green) 100%);border-radius:2px}
+.seg{position:relative;padding:14px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px}
+.seg::before{content:'';position:absolute;left:-25px;top:18px;width:13px;height:13px;border-radius:50%;border:3px solid var(--gold);background:var(--bg)}
+.seg.repeat::before{border-color:var(--green)}
+.seg.hero::before{border-color:var(--gold);background:var(--gold)}
+.seg .label{font-size:12px;font-weight:600;letter-spacing:.04em;color:var(--gold);margin-bottom:4px}
+.seg.repeat .label{color:var(--green)}
+.seg .title{font-size:16px;font-weight:600;margin-bottom:4px}
+.seg .detail{font-size:14px;color:var(--sub);margin:0}
+.seg .meta{display:flex;gap:16px;margin-top:8px;font-size:13px;color:var(--sub)}
+.seg .meta span{display:flex;align-items:center;gap:4px}
+.badge{font-size:11px;font-weight:700;border-radius:4px;padding:2px 7px;background:rgba(212,168,67,.15);color:var(--gold)}
+.badge.g{background:rgba(63,185,80,.15);color:var(--green)}
+
+/* Atmosphere */
+.atmo{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.acard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.acard .icon{font-size:28px;margin-bottom:8px}
+.acard b{display:block;font-size:14px;margin-bottom:4px}
+.acard span{font-size:13px;color:var(--sub);line-height:1.45}
+
+/* Tech */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.tcard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px}
+.tcard b{display:block;font-size:14px;margin-bottom:4px}
+.tcard span{font-size:13px;color:var(--sub);line-height:1.45}
+.tcard code{font:13px ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(255,255,255,.08);padding:1px 5px;border-radius:3px}
+
+/* Questions */
+.qlist{list-style:none;padding:0;margin:16px 0}
+.qlist li{padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;margin-bottom:8px;font-size:15px}
+.qlist li b{color:var(--gold);font-weight:600}
+.qlist li span{display:block;font-size:13px;color:var(--sub);margin-top:4px}
+
+.foot{margin-top:48px;padding:16px 0 40px;border-top:1px solid var(--border);font-size:13px;color:var(--sub)}
+@media (max-width:600px){.atmo,.grid2{grid-template-columns:1fr}.wrap{padding:0 14px}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <h1>Istanbul bus map – route breakdown</h1>
+  <p>For your arcade bus game, from Josinaldo. Based on your photos and the Google Maps route.</p>
+</div></header>
+<main class="wrap">
+
+<h2>Your route, broken into segments</h2>
+<p class="note">Atatürk Bulvarı, 3 lanes each way. The aqueduct (Bozdoğan Kemeri) is the hero landmark. Everything before it is hand-built; everything after it tiles and repeats.</p>
+
+<div class="route">
+  <div class="seg">
+    <div class="label">SEGMENT 1 – HAND-BUILT</div>
+    <div class="title">Northern approach</div>
+    <p class="detail">Wide boulevard, residential buildings, small shops, trees lining the median. Gentle downhill. The aqueduct appears in the distance and grows as the player gets closer.</p>
+    <div class="meta"><span>~2 min</span><span>~800 m</span><span><span class="badge">Unique</span></span></div>
+  </div>
+  <div class="seg">
+    <div class="label">SEGMENT 2 – HAND-BUILT</div>
+    <div class="title">Aqueduct approach</div>
+    <p class="detail">The road curves slightly. The aqueduct fills the view: two tiers of arches, stone and moss, pigeons. Traffic thickens. Yellow taxis weave. A tram line appears on the left.</p>
+    <div class="meta"><span>~1.5 min</span><span>~600 m</span><span><span class="badge">Unique</span></span></div>
+  </div>
+  <div class="seg hero">
+    <div class="label">★ HERO – HAND-BUILT</div>
+    <div class="title">Under the Valens Aqueduct</div>
+    <p class="detail">The bus drives through the arches. Massive stone columns on both sides. Shadow and light flicker. The road briefly narrows. This is the moment players remember and screenshot.</p>
+    <div class="meta"><span>~30 sec</span><span>~200 m</span><span><span class="badge">Hero landmark</span></span></div>
+  </div>
+  <div class="seg">
+    <div class="label">SEGMENT 3 – HAND-BUILT</div>
+    <div class="title">Downhill toward the water</div>
+    <p class="detail">Past the aqueduct, the road opens up. Mosques and minarets on the skyline. The Golden Horn appears ahead. Denser commercial buildings, more pedestrians, bazaar-like side streets.</p>
+    <div class="meta"><span>~2.5 min</span><span>~1 km</span><span><span class="badge">Unique</span></span></div>
+  </div>
+  <div class="seg">
+    <div class="label">SEGMENT 4 – HAND-BUILT</div>
+    <div class="title">Eminönü and the waterfront</div>
+    <p class="detail">The boulevard ends at the coast. Ferries, seagulls, fish-bread vendors. A natural turn point or level transition. The bus could cross the Galata Bridge here, or the level loops.</p>
+    <div class="meta"><span>~1 min</span><span>~400 m</span><span><span class="badge">Unique</span></span></div>
+  </div>
+  <div class="seg repeat">
+    <div class="label">SEGMENT 5 – REPEATING</div>
+    <div class="title">Tiling boulevard</div>
+    <p class="detail">A 400-500 m tile that loops seamlessly. Same lane count and road width. Buildings, trees, and props are shuffled with small variations (awning colors, parked cars, shop signs) so the repeat isn't obvious. Each tile can be mirrored for more variety at zero extra cost.</p>
+    <div class="meta"><span>Infinite</span><span>400-500 m tile</span><span><span class="badge g">Repeating</span></span></div>
+  </div>
+</div>
+
+<p class="note">Total hand-built: ~3 km of road, about 6-7 minutes at arcade bus speed (~30 km/h average with traffic). After that, the tiling section keeps the game going as long as you want.</p>
+
+<h2>What gives it the Istanbul atmosphere</h2>
+<p class="note">You said "catch the atmosphere, not the same exact things." These are the elements that make a player think Istanbul without copying every building.</p>
+<div class="atmo">
+  <div class="acard"><div class="icon">🏛️</div><b>Stone and plaster</b><span>Warm beige and grey stone on older buildings. Cracked plaster on side walls. Iron balconies. The aqueduct itself is weathered limestone with moss in the cracks.</span></div>
+  <div class="acard"><div class="icon">🕌</div><b>Minarets on the skyline</b><span>Two or three mosques visible in the distance, pencil-thin minarets breaking the roofline. They don't need to be close, just silhouetted against the sky.</span></div>
+  <div class="acard"><div class="icon">🚕</div><b>Yellow taxis and traffic</b><span>Istanbul's yellow taxis are iconic. A few weaving through traffic, plus city buses and a tram on the boulevard, sell the scene fast.</span></div>
+  <div class="acard"><div class="icon">🌳</div><b>Plane trees on the median</b><span>Atatürk Bulvarı has rows of mature plane trees down the middle. Dappled light through the canopy is a strong visual cue.</span></div>
+  <div class="acard"><div class="icon">🌅</div><b>Golden-hour light</b><span>Warm, low-angle sunlight. Long shadows. Slightly hazy. This is cheap to set up in any engine and does more for atmosphere than extra geometry.</span></div>
+  <div class="acard"><div class="icon">🐦</div><b>Sound and motion</b><span>Seagulls near the water, the call to prayer in the distance, honking. Pigeons on the aqueduct. Small details that cost almost nothing but make the world feel alive.</span></div>
+</div>
+
+<h2>How the repeating section works</h2>
+<p>The tile needs to loop without the player noticing a seam. Three tricks make this work:</p>
+<div class="grid2">
+  <div class="tcard"><b>1. Road alignment</b><span>Both ends of the tile are perfectly straight and at the same elevation, so the next copy connects flush. A slight curve in the middle hides the repetition.</span></div>
+  <div class="tcard"><b>2. Prop shuffling</b><span>The tile has slots: awning color, parked car type, shop sign, tree size. Each copy randomizes these slots at spawn, so two adjacent copies look different even though the geometry is the same.</span></div>
+  <div class="tcard"><b>3. Mirroring</b><span>Alternating tiles are flipped left-to-right. The player sees ABAB instead of AAAA, doubling apparent variety for free.</span></div>
+  <div class="tcard"><b>4. Despawn behind</b><span>Old tiles are removed once the bus passes them, so memory stays constant. On mobile this matters.</span></div>
+</div>
+
+<h2>Questions I'd want to settle first</h2>
+<ul class="qlist">
+  <li><b>What engine?</b><span>Unity or Unreal? The asset pipeline (FBX, materials, lightmaps) depends on this.</span></li>
+  <li><b>Target platform?</b><span>Mobile (phone) has a strict polygon and draw-call budget. PC can handle much more. If both, we build for mobile first and add detail for PC.</span></li>
+  <li><b>Do you have the bus and game logic already?</b><span>If yes, I only need to build the environment and drop it into your project. If no, the scope is bigger.</span></li>
+  <li><b>Camera angle?</b><span>Third-person behind the bus needs less roadside detail than a cockpit view. This directly affects how much work goes into the buildings.</span></li>
+  <li><b>Art style?</b><span>Arcade can range from stylized/low-poly to semi-realistic. A reference screenshot from a game you like would help a lot.</span></li>
+  <li><b>Traffic and pedestrians?</b><span>Are these already in your game, or part of this job?</span></li>
+</ul>
+
+<h2>Rough timeline</h2>
+<div class="grid2">
+  <div class="tcard"><b>Week 1</b><span>Blockout: grey-box the full route at correct scale, place the aqueduct, test drive timing. You play it and confirm the feel before any detail work.</span></div>
+  <div class="tcard"><b>Week 2-3</b><span>Hero landmark: the aqueduct at full detail, with the arch drive-through. The moment that sells the game.</span></div>
+  <div class="tcard"><b>Week 3-4</b><span>Hand-built sections: buildings, props, and roadside detail for the unique 3 km. Atmosphere pass (lighting, skybox, particles).</span></div>
+  <div class="tcard"><b>Week 5</b><span>Tiling section: build and test the repeating tile, prop shuffling, and seamless looping. Optimization for your target platform.</span></div>
+</div>
+<p class="note">About five weeks for the environment. A grey-box you can drive through in week one means you're never waiting long to see progress. The exact price depends on platform and art style, which is why I'm asking before quoting.</p>
+
+<p class="foot">Route based on your Google Maps screenshot and the Valens Aqueduct photo. The segment distances are approximate, measured against the real boulevard.</p>
+</main>
+</body>
+</html>
